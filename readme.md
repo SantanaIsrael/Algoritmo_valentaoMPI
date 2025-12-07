@@ -55,7 +55,7 @@ Aqui estão os comandos para Ubutun/Debian:
 sudo apt-get update
 sudo apt-get install mpich
 ```
-## Compilando um MPI Program:
+### Compilando um MPI Program:
 Para compilar um programa escrito em C ou C++ que utiliza MPI, você deve usar o compilador MPI fornecido pela implementação que você instalou. Aqui está um exemplo de como compilar um programa MPI em C usando o `mpicc`, que é o compilador MPI para C.  
 
 ```bash
