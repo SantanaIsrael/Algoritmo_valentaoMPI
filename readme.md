@@ -67,3 +67,8 @@ Para executar um programa MPI, você geralmente usa o comando `mpirun` ou `mpiex
 ```bash
 mpirun -np 4 ./meu_programa_mpi
 ```
+Para forçar a execução considerar os núcleos virtuais, você pode usar a opção `--use-hwthread-cpus`:
+
+```bash
+mpirun --oversubscribe -np 5 meu_programa_mpi
+```
