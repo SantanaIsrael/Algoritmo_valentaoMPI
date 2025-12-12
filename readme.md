@@ -1,3 +1,37 @@
+===============================================
+Programador: Israel Santana - Algoritmo do Valentão e MPI
+Linguagem: C
+Data: 2024-06-10
+Descrição: Implementação do Algoritmo do Valentão utilizando MPI (Message Passing Interface) para comunicação entre processos em um sistema distribuído.
+===============================================
+
+# O que é agoritimo do valentão?
+O algoritmo do valentão (ou "bully algorithm") é um protocolo de eleição de líder utilizado em sistemas distribuídos para garantir que um único processo seja escolhido como o coordenador ou líder entre vários processos concorrentes. Esse algoritmo é especialmente útil em ambientes onde os processos podem falhar ou se desconectar.
+
+## Como funciona o algoritmo do valentão?
+
+1. **Início da Eleição:** Quando um processo detecta que o líder atual falhou (por exemplo, não responde a mensagens de "heartbeat"), ele inicia uma eleição. O processo que inicia a eleição envia uma mensagem de eleição para todos os processos com IDs maiores do que o seu.
+2. **Resposta dos Processos:** Os processos que recebem a mensagem de eleição respondem com uma mensagem de "OK" se estiverem ativos e tiverem um ID maior do que o processo que iniciou a eleição. Isso indica que eles estão dispostos a assumir o papel de líder.
+3. **Escolha do Líder:** Se o processo que iniciou a eleição não receber nenhuma resposta "OK" de processos com IDs maiores, ele se declara o líder e envia uma mensagem de "vencedor" para todos os outros processos. Caso contrário, ele aguarda a eleição ser concluída por um dos processos com ID maior.
+4. **Anúncio do Líder:** O processo que se torna o líder anuncia sua posição para todos os outros processos, que então reconhecem esse processo como o novo líder.
+
+## Vantagens do Algoritmo do Valentão:
+- Simplicidade: O algoritmo é relativamente simples de implementar e entender.
+
+- Robustez: Pode lidar com falhas de processos, desde que haja pelo menos um processo ativo com o maior ID.
+
+## Desvantagens do Algoritmo do Valentão:
+
+- Sobrecarga de Mensagens: Em sistemas com muitos processos, o número de mensagens trocadas pode ser alto, o que pode levar a congestionamento na rede.
+
+- Tempo de Eleição: O tempo necessário para concluir uma eleição pode ser significativo, especialmente em sistemas grandes.
+
+- Dependência de IDs: O algoritmo depende da existência de IDs únicos e ordenados para os processos, o que pode não ser ideal em todos os cenários.
+
+## Quando usar o Algoritmo do Valentão?
+
+O algoritmo do valentão é adequado para sistemas distribuídos onde a eleição de um líder é necessária e onde os processos podem falhar. Ele é frequentemente utilizado em sistemas de banco de dados distribuídos, sistemas de arquivos distribuídos e outros ambientes onde a coordenação entre processos é crucial para o funcionamento correto do sistema.
+
 # O que é MPI?
 MPI (Message Passing Interface) é um padrão de comunicação utilizado em computação paralela para permitir que processos independentes troquem mensagens entre si. Ele é amplamente utilizado em ambientes de computação de alto desempenho (HPC) para desenvolver aplicações que podem ser executadas em múltiplos nós de um cluster ou supercomputador.
 
