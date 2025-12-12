@@ -1,9 +1,4 @@
-===============================================
-Programador: Israel Santana - Algoritmo do Valentão e MPI
-Linguagem: C
-Data: 2024-06-10
-Descrição: Implementação do Algoritmo do Valentão utilizando MPI (Message Passing Interface) para comunicação entre processos em um sistema distribuído.
-===============================================
+**Descrição:** Implementação do Algoritmo do Valentão utilizando MPI (Message Passing Interface) para comunicação entre processos em um sistema distribuído.
 
 # O que é agoritimo do valentão?
 O algoritmo do valentão (ou "bully algorithm") é um protocolo de eleição de líder utilizado em sistemas distribuídos para garantir que um único processo seja escolhido como o coordenador ou líder entre vários processos concorrentes. Esse algoritmo é especialmente útil em ambientes onde os processos podem falhar ou se desconectar.
