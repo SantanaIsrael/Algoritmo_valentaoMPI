@@ -29,19 +29,12 @@ int main(int argc, char **argv)
     double ultimo_ping_enviado = MPI_Wtime();
     double inicio_minha_eleicao = 0.0;
 
-    const double INTERVALO_PING = 1.0;               // Enviar ping a cada 1 segundo pra ver se ta vivo o carinha
+    const double INTERVALO_PING = 1.0;               // Enviar ping a cada 1 segundo pra ver se ta vivo o mestre
     const double TEMPO_LIMITE_RESPOSTA_MESTRE = 2.5; // Se não responder em 2.5 segundos foi pro beleléu
     const double TEMPO_LIMITE_RESP_OK = 2.0;         // Tempo esperando pra responder se é maior no caso
 
     // Variável para saber quando foi a última vez que o mestre deu sinal de vida
     double ultima_resposta_mestre = MPI_Wtime();
-
-    // if (meu_rank == 0)
-    // {
-    //     printf("Digite o Rank do processo que deve falhar (ex: %d): ", total_processos);
-    //     fflush(stdout);
-    //     scanf("%d", &rank_vitima);
-    // }
 
     // Envia pra todo mundo quem vai morrer
     MPI_Bcast(&rank_vitima, 1, MPI_INT, 0, MPI_COMM_WORLD);
@@ -105,7 +98,7 @@ int main(int argc, char **argv)
                 if (em_eleicao)
                 {
                     em_eleicao = 0;
-                    printf("[Rank %d] Infelizmente recebi OK do Rank %d. Aguardando novo bocó.\n", meu_rank, status.MPI_SOURCE);
+                    printf("[Rank %d] Infelizmente recebi OK do Rank %d. Aguardando novo lider.\n", meu_rank, status.MPI_SOURCE);
                 }
                 break;
 
@@ -114,7 +107,7 @@ int main(int argc, char **argv)
                 sou_mestre = (meu_rank == mestre_atual);
                 em_eleicao = 0; // Paro minha eleição pois perdi para alguém maior
                 ultima_resposta_mestre = MPI_Wtime();
-                printf("[Rank %d] Novo bam bam bam é rank %d\n", meu_rank, mestre_atual);
+                printf("[Rank %d] Novo mestre é o rank %d\n", meu_rank, mestre_atual);
                 break;
             }
         }
@@ -136,7 +129,7 @@ int main(int argc, char **argv)
             //O chefão morreu?
             if (agora - ultima_resposta_mestre > TEMPO_LIMITE_RESPOSTA_MESTRE)
             {
-                printf("[Rank %d] Limite do tempo! O bocó do mestre %d morreu.\n", meu_rank, mestre_atual);
+                printf("[Rank %d] Limite do tempo! O mestre %d morreu.\n", meu_rank, mestre_atual);
                 iniciar_eleicao(meu_rank, total_processos);
                 em_eleicao = 1;
                 inicio_minha_eleicao = agora;
@@ -149,7 +142,7 @@ int main(int argc, char **argv)
             if (agora - inicio_minha_eleicao > TEMPO_LIMITE_RESP_OK)
             {
                 // Silêncio total dos maiores. GANHEI.
-                printf("[Rank %d] Fim do tempo de resposta, ninguem maior respondeu. EU SOU O CARA!\n", meu_rank);
+                printf("[Rank %d] Fim do tempo de resposta, ninguem maior respondeu. EU SOU O MESTRE!\n", meu_rank);
                 virar_mestre(total_processos, meu_rank);
 
                 mestre_atual = meu_rank;
