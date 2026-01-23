@@ -41,7 +41,7 @@ MPI (Message Passing Interface) é um padrão de comunicação utilizado em comp
 Para que o Computador A e o Computador B trabalhem juntos, o Computador A precisa enviar um pacote de dados (uma mensagem) pela rede, e o Computador B precisa explicitamente receber essa mensagem. O MPI padroniza como isso é feito.
 
 ### Como funciona na prática?
-Quando você roda um programa com MPI, você lança múltiplas cópias do mesmo programa (chamadas de processos). Aqui estão os conceitos chave que fazem isso funcionar:
+Quando você roda um programa com MPI, você lança múltiplas cópias do mesmo programa (chamadas de processos):
 
 **Communicator (Comunicador):** É o grupo de todos os processos que podem conversar entre si. O comunicador padrão é chamado `MPI_COMM_WORLD`.
 
